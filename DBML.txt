@@ -1,0 +1,25 @@
+Table book {
+  book_id integer [pk, increment]
+  title varchar [not null]
+  author varchar 
+  isbn integer
+}
+
+// Implemented by Django Authentication
+Table users {
+  user_id integer [pk, increment]
+  username varchar [not null, unique]
+  password varchar [not null]
+  email varchar [not null, unique]
+}
+
+Table issue {
+  issue_id integer [pk, increment]
+  book_id integer [not null]
+  user_id integer [not null]
+  issue_time datetime [not null]
+  return_time datetime [not null]
+}
+
+Ref: issue.book_id > book.book_id [delete: cascade, update: no action]
+Ref: issue.user_id - users.user_id [delete: cascade, update: no action]
